@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -53,13 +52,10 @@ public class DateSorter {
    * @return the collection of dates now sorted as per the spec
    */
   public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
-    List listNumberMonthWithRLetter = List.of(1,2,3,4,9,10,11,12);
-    List<LocalDate> listDateMonthWithR = unsortedDates.stream().filter(n->listNumberMonthWithRLetter.contains(n.getMonthValue()))
+    List<LocalDate> listDateMonthWithR = unsortedDates.stream().filter(n->n.getMonth().name().contains("R"))
         .sorted().toList();
-    List<LocalDate> listDateMonthWithoutR = unsortedDates.stream().filter(n->!listNumberMonthWithRLetter.contains(n.getMonthValue()))
+    List<LocalDate> listDateMonthWithoutR = unsortedDates.stream().filter(n->!n.getMonth().name().contains("R"))
         .sorted(Comparator.reverseOrder()).toList();
-    //System.out.println(listDateMonthWithR);
-    //System.out.println(listDateMonthWithoutR);
     return Stream.concat(listDateMonthWithR.stream(),listDateMonthWithoutR.stream()).toList();
 
   }
