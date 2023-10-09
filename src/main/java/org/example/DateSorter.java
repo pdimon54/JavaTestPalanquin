@@ -55,9 +55,9 @@ public class DateSorter {
   public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
     List listNumberMonthWithRLetter = List.of(1,2,3,4,9,10,11,12);
     List<LocalDate> listDateMonthWithR = unsortedDates.stream().filter(n->listNumberMonthWithRLetter.contains(n.getMonthValue()))
-        .sorted().collect(Collectors.toList());
+        .sorted().toList();
     List<LocalDate> listDateMonthWithoutR = unsortedDates.stream().filter(n->!listNumberMonthWithRLetter.contains(n.getMonthValue()))
-        .sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        .sorted(Comparator.reverseOrder()).toList();
     //System.out.println(listDateMonthWithR);
     //System.out.println(listDateMonthWithoutR);
     return Stream.concat(listDateMonthWithR.stream(),listDateMonthWithoutR.stream()).toList();
